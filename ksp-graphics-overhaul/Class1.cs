@@ -9,11 +9,12 @@ using UnityEngine;
 namespace ksp_graphics_overhaul
 {
 
-    public class Class1 : PartModule
+    [KSPAddon(KSPAddon.Startup.EveryScene, false)]
+    public class Class1 : MonoBehaviour
     {
-        public override void OnStart(StartState state)
+        public void Awake()
         {
-            print("Hello world!");
+            print("ksp-graphics-overhaul: Hello world!");
         }
     }
 
