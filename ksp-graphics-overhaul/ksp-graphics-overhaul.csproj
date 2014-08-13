@@ -46,14 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraHook.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="GraphicsOverhaul.cs" />
     <Compile Include="DepthOfField34.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shaders.cs" />
+    <Compile Include="XMLConfigReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y ksp-graphics-overhaul.dll $(KSP_PATH)GameData\</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y ksp-graphics-overhaul.dll $(KSP_PATH)GameData\ksp-graphics-overhaul\</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,22 +12,20 @@ namespace ksp_graphics_overhaul
     {
 
         public RenderTexture targetTexture = null;
-        private Material diffuseMaterial = null;
 
         public void Awake()
         {
-            diffuseMaterial = new Material(Shaders.DiffuseDefault);
-
             targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
             this.gameObject.camera.targetTexture = targetTexture;
-            this.gameObject.camera.clearFlags = CameraClearFlags.Color | CameraClearFlags.Depth;
+            this.gameObject.camera.clearFlags = CameraClearFlags.Nothing;
 
             if(this.gameObject.GetComponent("BloomAndLensFlares") != null)
             {
                Destroy(this.gameObject.GetComponent("BloomAndLensFlares"));
             }
 
-           this.gameObject.camera.depthTextureMode = DepthTextureMode.Depth;
+            this.gameObject.camera.depthTextureMode = DepthTextureMode.Depth;
+//           this.gameObject.camera.renderingPath = RenderingPath.DeferredLighting;
         }
 
         public void Update()
@@ -38,61 +36,19 @@ namespace ksp_graphics_overhaul
         {
         }
 
-        private HashSet<string> replacedShaders = new HashSet<string>();
-        private HashSet<string> vanillaShaders = new HashSet<string>();
-
-        private Vector2 shadersScrollPos;
-
-        void DoDofWindow(int index)
-        {
-            shadersScrollPos = GUILayout.BeginScrollView(shadersScrollPos);
-
-            GUILayout.Label("vanilla");
-            foreach(string sh in vanillaShaders)
-            {
-                if(GUILayout.Button(sh))
-                {
-                    replacedShaders.Add(sh);
-                    vanillaShaders.Remove(sh);
-                    return;
-                }
-            }
-
-            GUILayout.Label("replaced");
-            foreach(string sh in replacedShaders)
-            {
-                if(GUILayout.Button(sh))
-                {
-                    vanillaShaders.Add(sh);
-                    replacedShaders.Remove(sh);
-                    return;
-                }
-            }
-
-            GUILayout.EndScrollView();
-        }
-
-        void OnGUI()
-        {
-            print("gui");
-            GUI.Window(1, new Rect(Screen.width - 512, 32, 512, 300), DoDofWindow, "shader replacement");
-        }
-
         void OnPreRender()
         {
             foreach (Renderer renderer in GameObject.FindObjectsOfType<Renderer>())
             {
-                var name = renderer.material.shader.name;
-
-                if(replacedShaders.Contains(name))
+                var shaderName = renderer.material.shader.name;
+                if(Shaders.Replacements.ContainsKey(shaderName))
                 {
-                    renderer.material.shader = diffuseMaterial.shader;
-                }
-                else if(!vanillaShaders.Contains(name))
-                {
-                    vanillaShaders.Add(name);
+                    renderer.material.shader = Shaders.GetShader(Shaders.Replacements[shaderName]);
                 }
             }
+
+            RenderTexture.active = targetTexture;
+            GL.Clear(true, true, new Color(1, 0, 1, 0));
         }
 
         void OnPostRender()
