@@ -1,0 +1,37 @@
+Particles/Alpha Blended
+Sprite/Vertex Colored
+Particles/Additive
+Particles/Additive (Soft)
+Unlit/Texture
+Transparent/Diffuse
+Bumped Specular
+Diffuse
+KSP/Bumped Specular
+KSP/Diffuse
+KSP/Alpha/Unlit Transparent
+KSP/Specular
+KSP/Emissive/Diffuse
+KSP/Alpha/Translucent
+Hidden/InternalErrorShader
+KSP/Emissive/Bumped Specular
+KSP/Alpha/Cutoff
+KSP/Unlit
+Diffuse Wrapped
+Terrain/PQS/Aerial Cutout
+Terrain/Scaled Planet (Simple)
+AtmosphereFromGround
+Terrain/Scaled Planet (RimAerial)
+Unlit/Transparent Tint
+Diffuse Multiply
+Decal/Blended
+Specular
+Bumped Diffuse
+Transparent/Cutout/Bumped Diffuse
+Diffuse Detail (Alpha)
+Emissive Multi Ramp Sunspots
+Terrain/PQS/PQS Main - Optimised
+Terrain/PQS/Ocean Surface Quad
+Unlit/Transparent
+Sprite/Simple Texture (Unlit)
+GUI/3D Text Shader
+Depth Mask
